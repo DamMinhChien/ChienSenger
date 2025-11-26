@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Infrastructure.Persistence.Models;
+
+public partial class Conversation
+{
+    public int Id { get; set; }
+
+    public int? User1Id { get; set; }
+
+    public int? User2Id { get; set; }
+
+    public string? LastMessage { get; set; }
+
+    public DateTime? UpdatedAt { get; set; }
+
+    public virtual ICollection<Message> Messages { get; set; } = new List<Message>();
+
+    public virtual User? User1 { get; set; }
+
+    public virtual User? User2 { get; set; }
+}

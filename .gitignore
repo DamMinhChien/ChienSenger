@@ -1,0 +1,124 @@
+########################################
+# ANDROID / KOTLIN / COMPOSE
+########################################
+
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Files for ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+
+# Gradle files
+.gradle/
+build/
+*/build/
+
+# Local configuration file
+local.properties
+
+# Log files
+*.log
+
+# Keystore files
+*.jks
+*.keystore
+*.der
+
+# Android Studio
+.idea/
+*.iml
+captures/
+externalNativeBuild/
+.cxx/
+
+# Kotlin specific
+*.kotlin_module
+*.kts~
+
+########################################
+# .NET / C# / ASP.NET Core
+########################################
+
+# Build Artifacts
+bin/
+obj/
+out/
+artifacts/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
+
+# Visual Studio cache and temp files
+.vs/
+*.cache
+*.db
+
+# NuGet
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+
+# ASP.NET secrets
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+
+# Logs
+logs/
+*.log
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Rider
+.idea/
+
+# Entity Framework
+Migrations/
+
+########################################
+# OS-specific
+########################################
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+########################################
+# VS Code
+########################################
+
+.vscode/
+
+########################################
+# OTHER COMMON
+########################################
+
+node_modules/
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+*.orig
