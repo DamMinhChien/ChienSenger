@@ -27,7 +27,8 @@ public partial class AppDbContext : DbContext
         modelBuilder
             .HasPostgresEnum("friend_status", new[] { "pending", "accepted", "rejected" })
             .HasPostgresEnum("message_status", new[] { "sent", "delivered", "read" })
-            .HasPostgresEnum("message_type", new[] { "text", "image" });
+            .HasPostgresEnum("message_type", new[] { "text", "image" })
+            .HasPostgresEnum("user_role", new[] { "admin", "user" });
 
         modelBuilder.Entity<Conversation>(entity =>
         {
@@ -54,12 +55,10 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.User1).WithMany(p => p.ConversationUser1s)
                 .HasForeignKey(d => d.User1Id)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("conversations_user1_id_fkey");
 
             entity.HasOne(d => d.User2).WithMany(p => p.ConversationUser2s)
                 .HasForeignKey(d => d.User2Id)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("conversations_user2_id_fkey");
         });
 
@@ -81,12 +80,10 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.FriendNavigation).WithMany(p => p.FriendFriendNavigations)
                 .HasForeignKey(d => d.FriendId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("friends_friend_id_fkey");
 
             entity.HasOne(d => d.User).WithMany(p => p.FriendUsers)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("friends_user_id_fkey");
         });
 
@@ -111,12 +108,10 @@ public partial class AppDbContext : DbContext
 
             entity.HasOne(d => d.Conversation).WithMany(p => p.Messages)
                 .HasForeignKey(d => d.ConversationId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("messages_conversation_id_fkey");
 
             entity.HasOne(d => d.Sender).WithMany(p => p.Messages)
                 .HasForeignKey(d => d.SenderId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("messages_sender_id_fkey");
         });
 
@@ -137,6 +132,9 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.DisplayName)
                 .HasMaxLength(100)
                 .HasColumnName("display_name");
+            entity.Property(e => e.IsLocked)
+                .HasDefaultValue(false)
+                .HasColumnName("is_locked");
             entity.Property(e => e.PasswordHash).HasColumnName("password_hash");
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
