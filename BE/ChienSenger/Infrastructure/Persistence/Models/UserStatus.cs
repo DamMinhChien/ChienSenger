@@ -7,9 +7,9 @@ public partial class UserStatus
 {
     public int UserId { get; set; }
 
-    public bool? IsOnline { get; set; }
+    public bool IsOnline { get; set; }
 
-    public DateTime? LastSeen { get; set; }
+    public DateTime LastSeen { get; set; }
 
     public virtual User User { get; set; } = null!;
 }

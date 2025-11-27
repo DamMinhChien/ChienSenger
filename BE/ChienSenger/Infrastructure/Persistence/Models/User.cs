@@ -15,7 +15,9 @@ public partial class User
 
     public string? AvatarUrl { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; }
+
+    public bool IsLocked { get; set; }
 
     public virtual ICollection<Conversation> ConversationUser1s { get; set; } = new List<Conversation>();
 
