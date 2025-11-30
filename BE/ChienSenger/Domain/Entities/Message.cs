@@ -1,5 +1,6 @@
 ﻿using Domain.Common;
 using Domain.Enums;
+using Domain.Exceptions;
 
 namespace Domain.Entities;
 
@@ -36,21 +37,21 @@ public class Message : BaseEntity
     public void MarkAsSent()
     {
         if (Status != MessageStatus.Sending)
-            throw new InvalidOperationException("Chỉ tin nhắn đang gửi mới có thể được đánh dấu là Sent.");
+            throw new DomainException("Chỉ tin nhắn đang gửi mới có thể được đánh dấu là Sent.");
         Status = MessageStatus.Sent;
     }
 
     public void MarkAsDelivered()
     {
         if (Status != MessageStatus.Sent)
-            throw new InvalidOperationException("Chỉ tin nhắn đã gửi mới có thể được đánh dấu là Delivered.");
+            throw new DomainException("Chỉ tin nhắn đã gửi mới có thể được đánh dấu là Delivered.");
         Status = MessageStatus.Delivered;
     }
     
     public void MarkAsRead()
     {
         if (Status != MessageStatus.Delivered && Status != MessageStatus.Sent)
-            throw new InvalidOperationException(
+            throw new DomainException(
                 "Chỉ tin nhắn đã gửi hoặc đã nhận mới có thể được đánh dấu là Delivered.");
         Status = MessageStatus.Read;
     }
@@ -58,7 +59,7 @@ public class Message : BaseEntity
     public void MarkAsFailed()
     {
         if (Status != MessageStatus.Sending)
-            throw new InvalidOperationException(
+            throw new DomainException(
                 "Chỉ tin nhắn đang gửi mới có thể được đánh dấu là Failed.");
         Status = MessageStatus.Failed;
     }
@@ -66,7 +67,7 @@ public class Message : BaseEntity
     public void MarkAsDeleted()
     {
         if (Status != MessageStatus.Read)
-            throw new InvalidOperationException(
+            throw new DomainException(
                 "Chỉ tin nhắn đã đọc mới có thể được đánh dấu là Deleted.");
         Status = MessageStatus.Deleted;
     }
@@ -74,7 +75,7 @@ public class Message : BaseEntity
     public void MarkAsRecalled()
     {
         if (Status != MessageStatus.Read)
-            throw new InvalidOperationException(
+            throw new DomainException(
                 "Chỉ tin nhắn đã đọc mới có thể được đánh dấu là Recalled.");
         Status = MessageStatus.Recalled;
     }
@@ -82,7 +83,7 @@ public class Message : BaseEntity
     public void RetrySend()
     {
         if (Status != MessageStatus.Failed)
-            throw new InvalidOperationException(
+            throw new DomainException(
                 "Chỉ tin nhắn gửi thất bại mới có thể được yêu cầu gửi lại.");
         Status = MessageStatus.Sending;
         Timestamp = DateTime.UtcNow;
