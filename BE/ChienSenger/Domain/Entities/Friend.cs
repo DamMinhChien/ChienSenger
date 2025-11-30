@@ -1,5 +1,6 @@
 ﻿using Domain.Common;
 using Domain.Enums;
+using Domain.Exceptions;
 
 namespace Domain.Entities;
 
@@ -10,7 +11,7 @@ public class Friend : BaseEntity
     public Friend(int userId, int friendId)
     {
         if (userId == friendId)
-            throw new ArgumentException("Không thể tự kết bạn chính mình.");
+            throw new DomainException("Không thể tự kết bạn chính mình.");
         UserId = userId;
         FriendId = friendId;
         Status = FriendStatus.Pending;
@@ -29,10 +30,10 @@ public class Friend : BaseEntity
     public void Accept(int actionUserId)
     {
         if (actionUserId != FriendId)
-            throw new InvalidOperationException("Chỉ người nhận mới có thể chấp nhận yêu cầu kết bạn.");
+            throw new DomainException("Chỉ người nhận mới có thể chấp nhận yêu cầu kết bạn.");
 
         if (Status != FriendStatus.Pending)
-            throw new InvalidOperationException("Chỉ có thẻ chấp nhận yêu cầu đang xử lý");
+            throw new DomainException("Chỉ có thẻ chấp nhận yêu cầu đang xử lý");
         
         Status = FriendStatus.Accepted;
     }
@@ -41,10 +42,10 @@ public class Friend : BaseEntity
     public void Reject(int actionUserId)
     {
         if (actionUserId != FriendId)
-            throw new InvalidOperationException("Chỉ người nhận mới có thể chấp nhận yêu cầu kết bạn.");
+            throw new DomainException("Chỉ người nhận mới có thể chấp nhận yêu cầu kết bạn.");
 
         if (Status != FriendStatus.Pending)
-            throw new InvalidOperationException("Chỉ có thẻ chấp nhận yêu cầu đang xử lý");
+            throw new DomainException("Chỉ có thẻ chấp nhận yêu cầu đang xử lý");
         
         Status = FriendStatus.Rejected;
     }
@@ -53,10 +54,10 @@ public class Friend : BaseEntity
     public void Cancel(int actionUserId)
     {
         if (actionUserId != FriendId)
-            throw new InvalidOperationException("Chỉ người nhận mới có thể chấp nhận yêu cầu kết bạn.");
+            throw new DomainException("Chỉ người nhận mới có thể chấp nhận yêu cầu kết bạn.");
 
         if (Status != FriendStatus.Pending)
-            throw new InvalidOperationException("Chỉ có thẻ chấp nhận yêu cầu đang xử lý");
+            throw new DomainException("Chỉ có thẻ chấp nhận yêu cầu đang xử lý");
     }
     
     public bool IsAccepted() => Status == FriendStatus.Accepted;
