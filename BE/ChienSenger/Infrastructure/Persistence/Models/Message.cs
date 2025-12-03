@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Enums;
 
 namespace Infrastructure.Persistence.Models;
 
@@ -12,6 +13,10 @@ public partial class Message
     public int SenderId { get; set; }
 
     public string Content { get; set; } = null!;
+    
+    public MessageType Type { get; set; } =  MessageType.Text;
+
+    public MessageStatus Status { get; set; } = MessageStatus.Sending;
 
     public DateTime Timestamp { get; set; }
 
