@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Enums;
 
 namespace Infrastructure.Persistence.Models;
 
@@ -12,6 +13,8 @@ public partial class User
     public string PasswordHash { get; set; } = null!;
 
     public string? DisplayName { get; set; }
+
+    public RoleType? RoleType { get; set; } = Domain.Enums.RoleType.User;
 
     public string? AvatarUrl { get; set; }
 
