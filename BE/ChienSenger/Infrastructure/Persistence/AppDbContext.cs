@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Infrastructure.Persistence.Models;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
@@ -53,11 +51,11 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.User1Id).HasColumnName("user1_id");
             entity.Property(e => e.User2Id).HasColumnName("user2_id");
 
-            entity.HasOne(d => d.User1).WithMany(p => p.ConversationUser1s)
+            entity.HasOne<User>().WithMany()
                 .HasForeignKey(d => d.User1Id)
                 .HasConstraintName("conversations_user1_id_fkey");
 
-            entity.HasOne(d => d.User2).WithMany(p => p.ConversationUser2s)
+            entity.HasOne<User>().WithMany()
                 .HasForeignKey(d => d.User2Id)
                 .HasConstraintName("conversations_user2_id_fkey");
         });
@@ -77,16 +75,16 @@ public partial class AppDbContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
             entity.Property(e => e.FriendId).HasColumnName("friend_id");
-            entity.Property(e => e.IsBlocked)
-                .HasDefaultValue(false)
-                .HasColumnName("is_blocked");
+            entity.Property(e => e.BlockedByUserId)
+                .HasDefaultValue(null)
+                .HasColumnName("blocked_by_user_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
-            entity.HasOne(d => d.FriendNavigation).WithMany(p => p.FriendFriendNavigations)
+            entity.HasOne<User>().WithMany()
                 .HasForeignKey(d => d.FriendId)
                 .HasConstraintName("friends_friend_id_fkey");
 
-            entity.HasOne(d => d.User).WithMany(p => p.FriendUsers)
+            entity.HasOne<User>().WithMany()
                 .HasForeignKey(d => d.UserId)
                 .HasConstraintName("friends_user_id_fkey");
         });
@@ -112,13 +110,13 @@ public partial class AppDbContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("timestamp");
 
-            entity.HasOne(d => d.Conversation).WithMany(p => p.Messages)
+            entity.HasOne<Conversation>().WithMany()
                 .HasForeignKey(d => d.ConversationId)
                 .HasConstraintName("messages_conversation_id_fkey");
 
-            entity.HasOne(d => d.Sender).WithMany(p => p.Messages)
+            entity.HasOne<User>().WithMany()
                 .HasForeignKey(d => d.SenderId)
-                .HasConstraintName("messages_sender_id_fkey");
+                .HasConstraintName("messages_user_id_fkey");
         });
 
         modelBuilder.Entity<User>(entity =>
@@ -135,7 +133,7 @@ public partial class AppDbContext : DbContext
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("created_at");
-            entity.Property(e => e.RoleType)
+            entity.Property(e => e.Role)
                 .HasColumnName("role_type")
                 .HasConversion<string>()
                 .HasMaxLength(10)
@@ -169,7 +167,7 @@ public partial class AppDbContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("last_seen");
 
-            entity.HasOne(d => d.User).WithOne(p => p.UserStatus)
+            entity.HasOne<User>().WithOne()
                 .HasForeignKey<UserStatus>(d => d.UserId)
                 .HasConstraintName("user_status_user_id_fkey");
         });
