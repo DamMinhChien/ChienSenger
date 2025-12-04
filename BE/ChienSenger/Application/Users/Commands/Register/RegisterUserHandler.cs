@@ -1,6 +1,5 @@
 using Application.Common.Interfaces;
 using Application.Users.Exceptions;
-using Application.Users.Interfaces;
 using Application.Users.Interfaces.Repositories;
 using Application.Users.Interfaces.Security;
 using Domain.Entities;

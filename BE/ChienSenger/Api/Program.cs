@@ -1,7 +1,7 @@
 using Api.Middlewares;
+using Application;
 using FastEndpoints;
-using Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
+using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,10 +12,9 @@ builder.Services.AddOpenApi();
 builder.Services.AddFastEndpoints();
 builder.Services.AddSwaggerDocument();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+//DI
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 var app = builder.Build();
 
