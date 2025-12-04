@@ -22,6 +22,7 @@ public class Friend : BaseEntity
 
     public int FriendId { get; private set; } // người nhận lời mời
     
+    public int? BlockedByUserId { get; private set; }
     public FriendStatus Status { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
@@ -59,6 +60,32 @@ public class Friend : BaseEntity
         if (Status != FriendStatus.Pending)
             throw new DomainException("Chỉ có thẻ chấp nhận yêu cầu đang xử lý");
     }
+    
+    // Block
+    public void Block(int actionUserId)
+    {
+        if (BlockedByUserId.HasValue)
+            throw new DomainException("Đã chặn rồi");
+
+        if (actionUserId != UserId && actionUserId != FriendId)
+            throw new DomainException("Không hợp lệ");
+
+        BlockedByUserId = actionUserId;
+    }
+
+    public void UnBlock(int actionUserId)
+    {
+        if (!BlockedByUserId.HasValue)
+            throw new DomainException("Hiện chưa chặn");
+
+        if (BlockedByUserId != actionUserId)
+            throw new DomainException("Chỉ người đã chặn mới có thể bỏ chặn");
+
+        BlockedByUserId = null;
+    }
+
+    public bool IsBlock() => BlockedByUserId.HasValue;
+
     
     public bool IsAccepted() => Status == FriendStatus.Accepted;
 

@@ -1,8 +1,10 @@
+using Application.Users.Commands.Register;
+using FastEndpoints;
 using FluentValidation;
 
-namespace Application.Users.Commands.Register;
+namespace Api.Users;
 
-public class RegisterUserValidator : AbstractValidator<RegisterUserCommand>
+public class RegisterUserValidator : Validator<RegisterUserCommand>
 {
     public RegisterUserValidator()
     {
