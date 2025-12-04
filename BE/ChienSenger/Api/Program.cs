@@ -1,6 +1,8 @@
+using Api.Configurations;
 using Api.Middlewares;
 using Application;
 using FastEndpoints;
+using FastEndpoints.Swagger;
 using Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,9 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddSingleton<ExceptionMiddleware>();
-builder.Services.AddOpenApi();
 builder.Services.AddFastEndpoints();
-builder.Services.AddSwaggerDocument();
+builder.Services.SwaggerDocument();
+
+builder.Services.AddAuthorization();
 
 //DI
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -21,16 +24,16 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
-    app.UseSwaggerUi();
+    app.UseSwaggerGen();
 }
 
 app.UseStaticFiles();
 
 // Catch global exceptions
+
 app.UseExceptionMiddleware();
 
-app.UseFastEndpoints();
+app.UseFastEndpointsWithCustomErrors();
 
 app.UseHttpsRedirection();
 

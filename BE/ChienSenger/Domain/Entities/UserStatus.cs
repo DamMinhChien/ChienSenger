@@ -19,7 +19,7 @@ public class UserStatus
 
     public bool IsOnline { get; private set; }
 
-    public DateTime LastSeen { get; private set; }
+    public DateTimeOffset LastSeen { get; private set; }
 
     public void SetOnline()
     {

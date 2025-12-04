@@ -39,7 +39,7 @@ public class User : BaseEntity
 
     public string? AvatarUrl { get; private set; }
 
-    public DateTime CreatedAt { get; private set; }
+    public DateTimeOffset CreatedAt { get; private set; }
 
     public bool IsLocked { get; private set; }
     

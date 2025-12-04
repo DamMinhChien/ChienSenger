@@ -1,14 +1,13 @@
 using Application.Common.Interfaces;
-using Application.Users.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly DbContext _db;
+    private readonly AppDbContext _db;
 
-    public UnitOfWork(DbContext db)
+    public UnitOfWork(AppDbContext db)
     {
         _db = db;
     }

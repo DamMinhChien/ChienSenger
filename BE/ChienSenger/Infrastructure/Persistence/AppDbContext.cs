@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence;
@@ -24,7 +25,8 @@ public partial class AppDbContext : DbContext
     {
         modelBuilder
             .HasPostgresEnum("friend_status", new[] { "pending", "accepted", "rejected" })
-            .HasPostgresEnum("message_status", new[] { "sent", "delivered", "read", "sending", "failed", "deleted", "recalled" })
+            .HasPostgresEnum("message_status",
+                new[] { "sent", "delivered", "read", "sending", "failed", "deleted", "recalled" })
             .HasPostgresEnum("message_type", new[] { "text", "image" })
             .HasPostgresEnum("user_role", new[] { "admin", "user" });
 
@@ -46,7 +48,7 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.LastMessage).HasColumnName("last_message");
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasColumnType("timestamp with time zone")
                 .HasColumnName("updated_at");
             entity.Property(e => e.User1Id).HasColumnName("user1_id");
             entity.Property(e => e.User2Id).HasColumnName("user2_id");
@@ -69,10 +71,11 @@ public partial class AppDbContext : DbContext
             entity.HasIndex(e => new { e.UserId, e.FriendId }, "friends_user_id_friend_id_key").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.Status).HasColumnName("status").HasConversion<string>().HasDefaultValue("pending");
+            entity.Property(e => e.Status).HasColumnName("status").HasConversion<string>()
+                .HasDefaultValue(FriendStatus.Pending);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasColumnType("timestamp with time zone")
                 .HasColumnName("created_at");
             entity.Property(e => e.FriendId).HasColumnName("friend_id");
             entity.Property(e => e.BlockedByUserId)
@@ -101,13 +104,13 @@ public partial class AppDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Content).HasColumnName("content");
-            entity.Property(e => e.Status).HasColumnName("status").HasConversion<string>().HasDefaultValue("sending");
-            entity.Property(e => e.Type).HasColumnName("type").HasConversion<string>().HasDefaultValue("text");
+            entity.Property(e => e.Status).HasColumnName("status").HasConversion<string>().HasDefaultValue(MessageStatus.Sending);
+            entity.Property(e => e.Type).HasColumnName("type").HasConversion<string>().HasDefaultValue(MessageType.Text);
             entity.Property(e => e.ConversationId).HasColumnName("conversation_id");
             entity.Property(e => e.SenderId).HasColumnName("sender_id");
             entity.Property(e => e.Timestamp)
                 .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasColumnType("timestamp with time zone")
                 .HasColumnName("timestamp");
 
             entity.HasOne<Conversation>().WithMany()
@@ -131,13 +134,13 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.AvatarUrl).HasColumnName("avatar_url");
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasColumnType("timestamp with time zone")
                 .HasColumnName("created_at");
             entity.Property(e => e.Role)
-                .HasColumnName("role_type")
+                .HasColumnName("role")
                 .HasConversion<string>()
                 .HasMaxLength(10)
-                .HasDefaultValue("user");
+                .HasDefaultValue(RoleType.User);
             entity.Property(e => e.DisplayName)
                 .HasMaxLength(100)
                 .HasColumnName("display_name");
@@ -164,7 +167,7 @@ public partial class AppDbContext : DbContext
                 .HasColumnName("is_online");
             entity.Property(e => e.LastSeen)
                 .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasColumnType("timestamp with time zone")
                 .HasColumnName("last_seen");
 
             entity.HasOne<User>().WithOne()

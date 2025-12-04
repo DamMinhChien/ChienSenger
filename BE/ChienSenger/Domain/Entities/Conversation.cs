@@ -37,7 +37,7 @@ public class Conversation : BaseEntity
 
     public string? LastMessage { get; private set; }
 
-    public DateTime UpdatedAt { get; private set; }
+    public DateTimeOffset UpdatedAt { get; private set; }
     
     public void AddMessage(string message)
     {
