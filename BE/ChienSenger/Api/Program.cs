@@ -1,3 +1,4 @@
+using Api.Middlewares;
 using FastEndpoints;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddSingleton<ExceptionMiddleware>();
 builder.Services.AddOpenApi();
 builder.Services.AddFastEndpoints();
 builder.Services.AddSwaggerDocument();
@@ -25,6 +27,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
+
+// Catch global exceptions
+app.UseExceptionMiddleware();
 
 app.UseFastEndpoints();
 
