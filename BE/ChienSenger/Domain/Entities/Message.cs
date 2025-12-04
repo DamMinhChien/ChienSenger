@@ -32,7 +32,7 @@ public class Message : BaseEntity
 
     public string Content { get; private set; } = null!;
 
-    public DateTime Timestamp { get; private set; }
+    public DateTimeOffset Timestamp { get; private set; }
 
     public void MarkAsSent()
     {

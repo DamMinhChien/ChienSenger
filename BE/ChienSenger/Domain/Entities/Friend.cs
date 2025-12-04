@@ -25,7 +25,7 @@ public class Friend : BaseEntity
     public int? BlockedByUserId { get; private set; }
     public FriendStatus Status { get; private set; }
 
-    public DateTime CreatedAt { get; private set; }
+    public DateTimeOffset CreatedAt { get; private set; }
 
     // Chỉ người nhận được lời mời mới có quyền thao tác + Trạng thái là Pending thì mới dc chấp nhận
     public void Accept(int actionUserId)

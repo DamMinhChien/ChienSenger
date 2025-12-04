@@ -10,6 +10,7 @@ public class ExceptionMiddleware : IMiddleware
         {
             await next(context);
         }
+        // Nó k bắt dc phần này
         catch (FluentValidation.ValidationException e)
         {
             var errors = e.Errors.Select(ex => new ApiError(ex.PropertyName, ex.ErrorMessage)).ToList();
@@ -19,6 +20,7 @@ public class ExceptionMiddleware : IMiddleware
             context.Response.StatusCode = 400;
             await context.Response.WriteAsJsonAsync(response);
         }
+        // Nó k bắt dc phần này
         catch (Exception e)
         {
             var status = e switch
