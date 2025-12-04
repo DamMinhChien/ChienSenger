@@ -85,7 +85,6 @@ public class Friend : BaseEntity
     }
 
     public bool IsBlock() => BlockedByUserId.HasValue;
-
     
     public bool IsAccepted() => Status == FriendStatus.Accepted;
 

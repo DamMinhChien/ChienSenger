@@ -11,10 +11,10 @@ public class User : BaseEntity
     public User(string username, string passwordHash, string? displayName = null, string? avatarUrl = null, RoleType role = RoleType.User)
     {
         if (string.IsNullOrWhiteSpace(username))
-            throw new ArgumentException("Tên đăng nhập không được để trống.");
+            throw new DomainException("Tên đăng nhập không được để trống.");
 
         if (string.IsNullOrWhiteSpace(passwordHash))
-            throw new ArgumentException("Mật khẩu không được để trống.");
+            throw new DomainException("Mật khẩu không được để trống.");
 
         Username = username;
         PasswordHash = passwordHash;
