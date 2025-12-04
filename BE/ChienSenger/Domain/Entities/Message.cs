@@ -13,7 +13,7 @@ public class Message : BaseEntity
     public Message(int conversationId, int senderId, string content, MessageType type = MessageType.Text,
         MessageStatus status = MessageStatus.Sending)
     {
-        if (string.IsNullOrWhiteSpace(content)) throw new ArgumentException("Nội dung tin nhắn không được bỏ trống.");
+        if (string.IsNullOrWhiteSpace(content)) throw new DomainException("Nội dung tin nhắn không được bỏ trống.");
         ConversationId = conversationId;
         SenderId = senderId;
         Type = type;

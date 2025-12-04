@@ -42,7 +42,7 @@ public class Conversation : BaseEntity
     public void AddMessage(string message)
     {
         if (string.IsNullOrWhiteSpace(message))
-            throw new ArgumentException("Tin nhắn không được bỏ trống.");
+            throw new DomainException("Tin nhắn không được bỏ trống.");
 
         LastMessage = message;
         UpdatedAt = DateTime.UtcNow;
