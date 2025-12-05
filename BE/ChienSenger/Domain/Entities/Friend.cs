@@ -23,6 +23,7 @@ public class Friend : BaseEntity
     public int FriendId { get; private set; } // người nhận lời mời
     
     public int? BlockedByUserId { get; private set; }
+    
     public FriendStatus Status { get; private set; }
 
     public DateTimeOffset CreatedAt { get; private set; }

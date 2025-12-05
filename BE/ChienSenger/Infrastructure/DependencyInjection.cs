@@ -26,8 +26,12 @@ public static class DependencyInjection
         // Hasher
         services.AddSingleton<IPasswordHasher, PasswordHasher>();
         
+        // Token
+        services.AddSingleton<ITokenService, TokenService>();
+        
         // Repositories
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserStatusRepository, UserStatusRepository>();
         
         return services;
     }

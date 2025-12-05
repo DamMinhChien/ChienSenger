@@ -1,3 +1,4 @@
+using Api.AppGroup;
 using Application.Users.Commands.Register;
 using FastEndpoints;
 using MediatR;
@@ -16,13 +17,14 @@ public class RegisterUserEndpoint : Endpoint<RegisterUserCommand, ApiResponse<Re
 
     public override void Configure()
     {
-        Post("/Register");
+        Post("/register");
+        Group<UserGroup>();
         AllowAnonymous();
     }
 
     public override async Task HandleAsync(RegisterUserCommand req, CancellationToken ct)
     {
         var response = await _mediator.Send(req, ct);
-        await Send.OkAsync(ApiResponse<RegisterUserResponse>.Ok(response, "Tạo tài khoản thành công"));
+        await Send.OkAsync(ApiResponse<RegisterUserResponse>.Ok(response, "Tạo tài khoản thành công"), ct);
     }
 }

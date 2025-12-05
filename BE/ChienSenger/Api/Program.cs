@@ -14,6 +14,7 @@ builder.Services.AddFastEndpoints();
 builder.Services.SwaggerDocument();
 
 builder.Services.AddAuthorization();
+builder.Services.AddAuthenticationWithJwtBearer(builder.Configuration);
 
 //DI
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -33,10 +34,14 @@ app.UseStaticFiles();
 
 app.UseExceptionMiddleware();
 
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+// app.UseDeveloperExceptionPage();
+
 app.UseFastEndpointsWithCustomErrors();
 
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
 
 app.Run();

@@ -1,3 +1,4 @@
+using Application.Users.Commands.Login;
 using Domain.Entities;
 
 namespace Application.Users.Interfaces.Repositories;
