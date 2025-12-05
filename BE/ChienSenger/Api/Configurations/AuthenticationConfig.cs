@@ -18,9 +18,9 @@ public static class AuthenticationConfig
                 ValidateIssuerSigningKey = true,
                 RequireExpirationTime = true,
                 RequireSignedTokens = true,
-                ValidIssuer = config["Issuer"],
-                ValidAudience = config["Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["SecretKey"]!))
+                ValidIssuer = jwtSettings["Issuer"],
+                ValidAudience = jwtSettings["Audience"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["SecretKey"]!))
             };
         });
         return services;

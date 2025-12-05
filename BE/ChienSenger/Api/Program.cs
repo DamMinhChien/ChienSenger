@@ -38,6 +38,8 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+// app.UseDeveloperExceptionPage();
+
 app.UseFastEndpointsWithCustomErrors();
 
 app.UseHttpsRedirection();

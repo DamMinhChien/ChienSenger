@@ -31,6 +31,8 @@ public class ExceptionMiddleware : IMiddleware
                 _ => 500
             };
             
+            Console.WriteLine(e);
+            
             var response = ApiResponse<object>.Fail(e.Message);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = status;

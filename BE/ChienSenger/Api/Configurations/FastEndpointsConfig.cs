@@ -9,6 +9,7 @@ public static class FastEndpointsConfig
     {
         app.UseFastEndpoints(c =>
         {
+            c.Endpoints.RoutePrefix = "api";
             c.Errors.ResponseBuilder = (failures, ctx, statusCode) =>
             {
                 var errors = failures.Select(ex => new ApiError(ex.PropertyName, ex.ErrorMessage)).ToList();
