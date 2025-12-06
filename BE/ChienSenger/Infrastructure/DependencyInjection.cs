@@ -1,4 +1,5 @@
 using Application.Common.Interfaces;
+using Application.Friends.Interfaces.Repositories;
 using Application.Users.Interfaces.Repositories;
 using Application.Users.Interfaces.Security;
 using Infrastructure.Persistence;
@@ -32,6 +33,7 @@ public static class DependencyInjection
         // Repositories
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserStatusRepository, UserStatusRepository>();
+        services.AddScoped<IFriendRepository, FriendRepository>();
         
         return services;
     }

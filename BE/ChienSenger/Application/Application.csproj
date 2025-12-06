@@ -12,6 +12,7 @@
 
     <ItemGroup>
       <Folder Include="Services\" />
+      <Folder Include="Users\Queries\" />
     </ItemGroup>
 
     <ItemGroup>

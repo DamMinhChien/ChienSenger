@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Api.Users;
 
-public class SearchUserValidator : AbstractValidator<SearchUserCommand>
+public class SearchUserValidator : AbstractValidator<SearchUserQuery>
 {
     public SearchUserValidator()
     {

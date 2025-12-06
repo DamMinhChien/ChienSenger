@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Application.Users.Commands.Search;
 
-public class SearchUserHandler : IRequestHandler<SearchUserCommand, IReadOnlyList<SearchUserResponse>>
+public class SearchUserHandler : IRequestHandler<SearchUserQuery, IReadOnlyList<SearchUserResponse>>
 {
     private readonly IUserRepository _userRepo;
     private readonly IUserStatusRepository _userStatusRepo;
@@ -15,7 +15,7 @@ public class SearchUserHandler : IRequestHandler<SearchUserCommand, IReadOnlyLis
         _userStatusRepo = userStatusRepo;
     }
 
-    public async Task<IReadOnlyList<SearchUserResponse>> Handle(SearchUserCommand request,
+    public async Task<IReadOnlyList<SearchUserResponse>> Handle(SearchUserQuery request,
         CancellationToken cancellationToken)
     {
         if(string.IsNullOrWhiteSpace(request.Query))

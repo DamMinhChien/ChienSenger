@@ -6,7 +6,7 @@ using Shared.Results;
 
 namespace Api.Users;
 
-public class SearchUserEndpoint : Endpoint<SearchUserCommand, ApiResponse<IReadOnlyList<SearchUserResponse>>>
+public class SearchUserEndpoint : Endpoint<SearchUserQuery, ApiResponse<IReadOnlyList<SearchUserResponse>>>
 {
     private readonly IMediator _mediator;
 
@@ -21,7 +21,7 @@ public class SearchUserEndpoint : Endpoint<SearchUserCommand, ApiResponse<IReadO
         Group<UserGroup>();
     }
 
-    public override async Task HandleAsync(SearchUserCommand req, CancellationToken ct)
+    public override async Task HandleAsync(SearchUserQuery req, CancellationToken ct)
     {
         var response = await _mediator.Send(req, ct);
         await Send.OkAsync(
