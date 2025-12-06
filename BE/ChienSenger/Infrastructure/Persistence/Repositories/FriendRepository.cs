@@ -23,4 +23,9 @@ public class FriendRepository : IFriendRepository
     {
         return await _db.Friends.AnyAsync(f => f.UserId == userId && f.FriendId == friendId);
     }
+
+    public async Task<IReadOnlyList<Friend>> GetFriendsAsync(int userId)
+    {
+        return await _db.Friends.Where(f => f.UserId == userId).ToListAsync();
+    }
 }

@@ -1,4 +1,4 @@
-using Application.Users.Commands.Search;
+using Application.Users.Queries.Search;
 using FluentValidation;
 
 namespace Api.Users;

@@ -2,7 +2,7 @@ using Application.Common.Interfaces;
 using Application.Users.Interfaces.Repositories;
 using MediatR;
 
-namespace Application.Users.Commands.Search;
+namespace Application.Users.Queries.Search;
 
 public class SearchUserHandler : IRequestHandler<SearchUserQuery, IReadOnlyList<SearchUserResponse>>
 {

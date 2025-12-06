@@ -34,4 +34,9 @@ public class UserRepository : IUserRepository
 
         return await users.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
     }
+
+    public async Task<bool> UserExists(int userId)
+    {
+        return await _db.Users.AnyAsync(u => u.Id == userId);
+    }
 }

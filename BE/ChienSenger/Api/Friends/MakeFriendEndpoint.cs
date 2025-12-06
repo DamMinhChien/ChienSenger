@@ -1,4 +1,5 @@
 using Api.AppGroup;
+using Api.Extensions;
 using Application.Friends.Commands.Make;
 using FastEndpoints;
 using MediatR;
@@ -23,7 +24,8 @@ public class MakeFriendEndpoint : Endpoint<MakeFriendCommand, ApiResponse<MakeFr
 
     public override async Task HandleAsync(MakeFriendCommand req, CancellationToken ct)
     {
-        var response = await _mediator.Send(req, ct);
+        var commandWithUserId = req with { UserId = User.GetCurrentUserId() };
+        var response = await _mediator.Send(commandWithUserId, ct);
         await Send.OkAsync(ApiResponse<MakeFriendResponse>.Ok(response, "Gửi lời mời kết bạn thành công"), ct);
     }
 }

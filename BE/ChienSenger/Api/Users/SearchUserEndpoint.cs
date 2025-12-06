@@ -1,5 +1,5 @@
 using Api.AppGroup;
-using Application.Users.Commands.Search;
+using Application.Users.Queries.Search;
 using FastEndpoints;
 using MediatR;
 using Shared.Results;
