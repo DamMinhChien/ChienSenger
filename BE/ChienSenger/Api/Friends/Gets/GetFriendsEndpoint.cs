@@ -18,7 +18,7 @@ public class GetFriendsEndpoint : EndpointWithoutRequest<ApiResponse<IReadOnlyLi
 
     public override void Configure()
     {
-        Get("friend/me");
+        Get("/");
         Group<FriendGroup>();
     }
 
