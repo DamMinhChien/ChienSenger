@@ -1,6 +1,8 @@
 using Api.Configurations;
 using Api.Middlewares;
+using Api.Services;
 using Application;
+using Application.Interfaces.Common;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Infrastructure;
@@ -19,6 +21,8 @@ builder.Services.AddAuthenticationWithJwtBearer(builder.Configuration);
 //DI
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 var app = builder.Build();
 

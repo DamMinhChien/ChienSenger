@@ -9,7 +9,7 @@ public class Conversation : BaseEntity
     {
     }
 
-    public Conversation(int user1Id, int user2Id, DateTime updatedAt, string? lastMessage = null)
+    public Conversation(int user1Id, int user2Id, DateTimeOffset updatedAt, string? lastMessage = null)
     {
         if (user1Id == user2Id)
             throw new DomainException("Không thể tạo hội thoại với chính mình.");
@@ -25,8 +25,6 @@ public class Conversation : BaseEntity
             User2Id = user1Id;
         }
         
-        User1Id = user1Id;
-        User2Id = user2Id;
         LastMessage = lastMessage;
         UpdatedAt = updatedAt;
     }

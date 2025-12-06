@@ -1,5 +1,5 @@
-using Application.Common.Interfaces;
-using Application.Users.Interfaces.Repositories;
+using Application.Interfaces.Common;
+using Application.Interfaces.Repositories;
 using MediatR;
 
 namespace Application.Users.Queries.Search;

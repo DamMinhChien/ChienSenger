@@ -1,4 +1,4 @@
-using Application.Friends.Interfaces.Repositories;
+using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +12,7 @@ public class FriendRepository : IFriendRepository
     {
         _db = db;
     }
-    
+
     public Friend Add(Friend friend)
     {
         _db.Friends.Add(friend);
@@ -27,5 +27,16 @@ public class FriendRepository : IFriendRepository
     public async Task<IReadOnlyList<Friend>> GetFriendsAsync(int userId)
     {
         return await _db.Friends.Where(f => f.UserId == userId).ToListAsync();
+    }
+
+    public void DeleteFriend(int userId, int friendId)
+    {
+        var friend = _db.Friends.SingleOrDefault(f => f.UserId == userId && f.FriendId == friendId);
+        if (friend != null) _db.Friends.Remove(friend);
+    }
+
+    public async Task<Friend> GetFriendAsync(int userId, int friendId)
+    {
+        return await _db.Friends.FirstAsync(f => f.UserId == userId && f.FriendId == friendId);
     }
 }

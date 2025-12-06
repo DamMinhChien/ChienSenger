@@ -1,4 +1,4 @@
-using Application.Users.Interfaces.Security;
+using Application.Interfaces.Security;
 
 namespace Infrastructure.Security;
 

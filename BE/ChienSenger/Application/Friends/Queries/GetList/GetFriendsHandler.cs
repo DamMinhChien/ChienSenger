@@ -1,4 +1,4 @@
-using Application.Friends.Interfaces.Repositories;
+using Application.Interfaces.Repositories;
 using AutoMapper;
 using MediatR;
 
