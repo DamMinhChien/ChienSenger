@@ -22,26 +22,26 @@ builder.Services.AddApplication();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+// Exception middleware
+app.UseExceptionMiddleware();
+
+// HTTPS redirection
+app.UseHttpsRedirection();
+
+// Static files
+app.UseStaticFiles();
+
+// Swagger
+if (app.Environment.IsDevelopment()) 
 {
     app.UseSwaggerGen();
 }
 
-app.UseStaticFiles();
-
-// Catch global exceptions
-
-app.UseExceptionMiddleware();
-
+// Authentication & Authorization
 app.UseAuthentication();
-
 app.UseAuthorization();
 
-// app.UseDeveloperExceptionPage();
-
+// FastEndpoints
 app.UseFastEndpointsWithCustomErrors();
-
-app.UseHttpsRedirection();
 
 app.Run();

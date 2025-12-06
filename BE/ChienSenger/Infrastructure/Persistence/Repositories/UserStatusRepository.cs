@@ -21,4 +21,10 @@ public class UserStatusRepository : IUserStatusRepository
     {
         return await _db.UserStatuses.FindAsync(userId);
     }
+
+    public async Task<bool> IsOnlineAsync(int userId)
+    {
+        var user = await _db.UserStatuses.FindAsync(userId);
+        return user is { IsOnline: true };
+    }
 }
