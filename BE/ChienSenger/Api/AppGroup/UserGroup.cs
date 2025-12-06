@@ -8,7 +8,8 @@ public sealed class UserGroup : Group
     {
         Configure("/users", ep =>
         {
-            ep.Tags("Users");
+            ep.Tags("Users Group");
+            ep.AuthSchemes("Bearer");
         });
     }
 }

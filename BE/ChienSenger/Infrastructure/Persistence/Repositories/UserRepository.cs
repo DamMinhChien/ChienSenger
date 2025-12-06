@@ -22,4 +22,16 @@ public class UserRepository : IUserRepository
     {
         _db.Users.Add(user);
     }
+
+    public async Task<IReadOnlyList<User>> SearchAsync(string query, int page = 1, int pageSize = 20)
+    {
+        var users = _db.Users.Where(q =>
+            EF.Functions.ILike(q.Username, $"%{query.Trim()}%") ||
+            (q.DisplayName != null && EF.Functions.ILike(q.DisplayName, $"%{query.Trim()}%")));
+
+        var totalUsers = users.Count();
+        var totalPages = (int)Math.Ceiling(totalUsers / (double)pageSize!);
+
+        return await users.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+    }
 }

@@ -18,7 +18,7 @@ public class LoginUserEndpoint : Endpoint<LoginUserCommand, ApiResponse<LoginUse
     public override void Configure()
     {
         Post("/login");
-        Group<UserGroup>();
+        Group<AuthGroup>();
         AllowAnonymous();
     }
 

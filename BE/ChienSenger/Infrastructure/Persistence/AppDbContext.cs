@@ -129,6 +129,8 @@ public partial class AppDbContext : DbContext
             entity.ToTable("users");
 
             entity.HasIndex(e => e.Username, "users_username_key").IsUnique();
+            
+            entity.HasIndex(e => e.DisplayName, "users_display_name_key");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AvatarUrl).HasColumnName("avatar_url");
