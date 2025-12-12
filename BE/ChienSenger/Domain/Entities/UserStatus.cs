@@ -23,16 +23,16 @@ public class UserStatus
 
     public void SetOnline()
     {
-        if (IsOnline)
-            throw new DomainException("Không thể bật trạng thái Online vì đã Online rồi.");
+        // if (IsOnline)
+        //     throw new DomainException("Không thể bật trạng thái Online vì đã Online rồi.");
         IsOnline = true;
         LastSeen = DateTime.UtcNow;
     }
     
     public void SetOffline()
     {
-        if (!IsOnline)
-            throw new DomainException("Không thể bật trạng thái Offline vì đã Offline rồi.");
+        // if (!IsOnline)
+        //     throw new DomainException("Không thể bật trạng thái Offline vì đã Offline rồi.");
         IsOnline = false;
         LastSeen = DateTime.UtcNow;
     }

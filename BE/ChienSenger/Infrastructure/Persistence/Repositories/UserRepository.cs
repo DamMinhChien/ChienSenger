@@ -1,4 +1,4 @@
-using Application.Users.Interfaces.Repositories;
+using Application.Interfaces.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,5 +33,10 @@ public class UserRepository : IUserRepository
         var totalPages = (int)Math.Ceiling(totalUsers / (double)pageSize!);
 
         return await users.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+    }
+
+    public async Task<bool> UserExists(int userId)
+    {
+        return await _db.Users.AnyAsync(u => u.Id == userId);
     }
 }

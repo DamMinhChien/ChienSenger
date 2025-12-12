@@ -1,7 +1,7 @@
-using Application.Common.Interfaces;
+using Application.Interfaces.Common;
+using Application.Interfaces.Repositories;
+using Application.Interfaces.Security;
 using Application.Users.Exceptions;
-using Application.Users.Interfaces.Repositories;
-using Application.Users.Interfaces.Security;
 using Domain.Exceptions;
 using MediatR;
 

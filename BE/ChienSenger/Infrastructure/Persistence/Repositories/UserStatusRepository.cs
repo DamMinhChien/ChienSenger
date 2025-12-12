@@ -1,4 +1,4 @@
-using Application.Users.Interfaces.Repositories;
+using Application.Interfaces.Repositories;
 using Domain.Entities;
 
 namespace Infrastructure.Persistence.Repositories;
