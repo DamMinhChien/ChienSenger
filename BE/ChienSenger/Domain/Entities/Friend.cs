@@ -69,7 +69,7 @@ public class Friend : BaseEntity
             throw new DomainException("Đã chặn rồi");
 
         if (actionUserId != UserId && actionUserId != FriendId)
-            throw new DomainException("Không hợp lệ");
+            throw new DomainException("Bạn không có quyền chặn");
 
         BlockedByUserId = actionUserId;
     }
